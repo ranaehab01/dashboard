@@ -1,0 +1,101 @@
+.not-found-container {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 30px;
+background: #f5f7fb;
+box-sizing: border-box;
+}
+
+.not-found-card {
+width: 100%;
+max-width: 500px;
+padding: 50px 40px;
+text-align: center;
+background: #ffffff;
+border-radius: 16px;
+box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+box-sizing: border-box;
+}
+
+.error-code {
+margin-bottom: 10px;
+font-size: 80px;
+font-weight: 800;
+line-height: 1;
+color: #007bff;
+}
+
+.not-found-card h1 {
+margin: 0 0 15px;
+font-size: 30px;
+font-weight: 700;
+color: #222;
+}
+
+.not-found-card p {
+margin: 8px 0;
+color: #555;
+font-size: 16px;
+line-height: 1.6;
+}
+
+.not-found-card .sub-message {
+font-size: 14px;
+color: #888;
+}
+
+.actions {
+display: flex;
+justify-content: center;
+gap: 12px;
+margin-top: 30px;
+}
+
+.actions button {
+border: none;
+padding: 12px 22px;
+border-radius: 8px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.2s ease;
+}
+
+.primary-btn {
+background: #007bff;
+color: #fff;
+}
+
+.primary-btn:hover {
+background: #0069d9;
+}
+
+.secondary-btn {
+background: #e9ecef;
+color: #333;
+}
+
+.secondary-btn:hover {
+background: #dfe3e6;
+}
+
+@media (max-width: 600px) {
+
+.not-found-card {
+padding: 40px 25px;
+}
+
+.error-code {
+font-size: 65px;
+}
+
+.actions {
+flex-direction: column;
+}
+
+.actions button {
+width: 100%;
+}
+}

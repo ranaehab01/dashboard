@@ -1,0 +1,95 @@
+<div class="role-page">
+  <!-- Header -->
+
+  <div class="page-header">
+    <div class="page-title">
+      <h2>Add Role</h2>
+
+      <p>Create a new role and assign permissions</p>
+    </div>
+  </div>
+
+  @if (errorMessage) {
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (successMessage) {
+    <div class="success">
+      {{ successMessage }}
+    </div>
+  }
+
+  <div class="form-card">
+    <form [formGroup]="roleForm" (ngSubmit)="createRole()">
+      <div class="form-group">
+        <label for="name"> Role Name </label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter role name"
+        />
+
+        @if (
+          roleForm.get("name")?.touched &&
+          roleForm.get("name")?.hasError("required")
+        ) {
+          <small class="field-error"> Role name is required. </small>
+        }
+      </div>
+
+      <div class="permissions-section">
+        <h3>Permissions</h3>
+
+        <div class="permission-table">
+          <div class="permission-row permission-header">
+            <div class="resource">Module</div>
+
+            <div>Create</div>
+
+            <div>View</div>
+
+            <div>Update</div>
+
+            <div>Delete</div>
+          </div>
+
+          @for (group of permissionGroups; track group.resource) {
+            <div class="permission-row">
+              <div class="resource">
+                {{ group.name }}
+              </div>
+
+              @for (action of actions; track action) {
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    [checked]="hasPermission(action, group.resource)"
+                    (change)="togglePermission(action, group.resource, $event)"
+                  />
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" routerLink="/roles">
+          Cancel
+        </button>
+
+        <button type="submit" class="save-btn" [disabled]="loading">
+          @if (loading) {
+            Creating...
+          } @else {
+            Create Role
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

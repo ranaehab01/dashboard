@@ -1,0 +1,105 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Create Account</h2>
+
+    <p class="subtitle">Create your account to get started</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <!-- Name -->
+
+      <div class="form-group">
+        <label for="name"> Name </label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your name"
+        />
+
+        @if (
+          registerForm.get("name")?.touched &&
+          registerForm.get("name")?.hasError("required")
+        ) {
+          <small class="error"> Name is required. </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email"> Email </label>
+
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        @if (
+          registerForm.get("email")?.touched &&
+          registerForm.get("email")?.hasError("required")
+        ) {
+          <small class="error"> Email is required. </small>
+        }
+
+        @if (
+          registerForm.get("email")?.touched &&
+          registerForm.get("email")?.hasError("email")
+        ) {
+          <small class="error"> Please enter a valid email. </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password"> Password </label>
+
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (
+          registerForm.get("password")?.touched &&
+          registerForm.get("password")?.hasError("required")
+        ) {
+          <small class="error"> Password is required. </small>
+        }
+
+        @if (
+          registerForm.get("password")?.touched &&
+          registerForm.get("password")?.hasError("minlength")
+        ) {
+          <small class="error"> Password must be at least 6 characters. </small>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
+
+      @if (successMessage) {
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
+      }
+
+      <button type="submit" [disabled]="loading">
+        @if (loading) {
+          Creating account...
+        } @else {
+          Register
+        }
+      </button>
+    </form>
+
+    <div class="login-link">
+      <span> Already have an account? </span>
+
+      <a routerLink="/login"> Login </a>
+    </div>
+  </div>
+</div>

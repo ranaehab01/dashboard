@@ -1,0 +1,124 @@
+<div class="role-page">
+  <div class="page-header">
+    <div class="page-title">
+      <h2>Roles & Permissions</h2>
+
+      <p>Manage roles and their permissions</p>
+    </div>
+
+    @if (can("create roles")) {
+      <button class="add-btn" type="button" routerLink="/roles/add">
+        + Add Role
+      </button>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (errorMessage) {
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (!loading && !errorMessage && can("view roles")) {
+    <div class="roles-list">
+      @for (role of roles; track role.id) {
+        <div class="role-card">
+          <div class="role-card-header" (click)="toggleRole(role)">
+            <div class="role-info">
+              <span class="role-name">
+                {{ role.name }}
+              </span>
+            </div>
+
+            <div class="actions" (click)="$event.stopPropagation()">
+              @if (can("update roles")) {
+                <button
+                  class="edit-btn"
+                  type="button"
+                  [routerLink]="['/roles/edit', role.id]"
+                >
+                  Edit
+                </button>
+              }
+
+              @if (can("delete roles")) {
+                <button
+                  class="delete-btn"
+                  type="button"
+                  (click)="deleteRole(role)"
+                >
+                  Delete
+                </button>
+              }
+
+              @if (can("view roles")) {
+                <button
+                  class="toggle-btn"
+                  type="button"
+                  (click)="toggleRole(role)"
+                >
+                  @if (isRoleExpanded(role)) {
+                    ▲
+
+                  } @else {
+                    ▼
+                  }
+                </button>
+              }
+            </div>
+          </div>
+
+          @if (isRoleExpanded(role) && can("view roles")) {
+            <div class="permission-wrapper">
+              <div class="permission-table">
+                <div class="permission-row permission-header">
+                  <div class="resource">Module</div>
+
+                  <div>Create</div>
+
+                  <div>View</div>
+
+                  <div>Update</div>
+
+                  <div>Delete</div>
+                </div>
+
+                @for (group of permissionGroups; track group.resource) {
+                  <div class="permission-row">
+                    <div class="resource">
+                      {{ group.name }}
+                    </div>
+
+                    @for (action of actions; track action) {
+                      <div class="checkbox-container">
+                        <input
+                          type="checkbox"
+                          [checked]="
+                            hasPermission(role, action, group.resource)
+                          "
+                          [disabled]="!can('update roles')"
+                          (change)="
+                            togglePermission(
+                              role,
+                              action,
+                              group.resource,
+                              $event
+                            )
+                          "
+                        />
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

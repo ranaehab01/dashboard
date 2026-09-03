@@ -1,0 +1,28 @@
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Sidebar */
+app-sidebar {
+  flex: 0 0 250px;
+  width: 250px;
+  min-width: 250px;
+}
+
+/* Main content */
+.dashboard-content {
+  flex: 1 1 auto;
+
+  min-width: 0;
+  width: 0;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}

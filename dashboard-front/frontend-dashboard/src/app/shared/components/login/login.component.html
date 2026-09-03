@@ -1,0 +1,85 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h1>Login</h1>
+
+    <p class="subtitle">
+      Sign in to your dashboard
+    </p>
+
+
+    <!-- Error message -->
+    <div class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+
+    <form (ngSubmit)="login()">
+
+      <!-- Email -->
+
+      <div class="form-group">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          required
+        >
+
+      </div>
+
+
+      <!-- Password -->
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          required
+        >
+
+      </div>
+
+
+      <!-- Login button -->
+
+      <button type="submit">
+        Login
+      </button>
+
+    </form>
+
+
+    <!-- Register link -->
+
+    <div class="register-link">
+
+      <span>
+        Don't have an account?
+      </span>
+
+      <a routerLink="/register">
+        Register
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,115 @@
+<div class="add-user-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Add User</h1>
+      <p>Create a new user</p>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Form -->
+  <form class="user-form" (ngSubmit)="addUser()">
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name"> User Name </label>
+
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="newUser.name"
+        placeholder="Enter user name"
+        required
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email"> Email </label>
+
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="newUser.email"
+        placeholder="Enter email"
+        required
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password"> Password </label>
+
+      <input
+        id="password"
+        type="password"
+        name="password"
+        [(ngModel)]="newUser.password"
+        placeholder="Enter password"
+        required
+      />
+    </div>
+
+    <!-- Type -->
+    <div class="form-group">
+      <label for="type"> Type </label>
+
+      <select id="type" name="type" [(ngModel)]="newUser.type">
+        <option value="staff">Admin</option>
+
+        <option value="staff">Product manager</option>
+
+        <option value="customer">Customer</option>
+      </select>
+    </div>
+
+    <!-- Role -->
+    <div class="form-group">
+      <label for="role"> Role </label>
+
+      <select
+        id="role"
+        name="role"
+        [(ngModel)]="newUser.role"
+        [disabled]="loadingRoles"
+        required
+      >
+        <option value="">Select role</option>
+
+        <option *ngFor="let role of roles" [value]="role.name">
+          {{ role.name }}
+        </option>
+      </select>
+
+      <small *ngIf="loadingRoles"> Loading roles... </small>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="button" class="cancel-button" routerLink="/users">
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="submit-button"
+        [disabled]="loading || loadingRoles"
+      >
+        <span *ngIf="!loading"> Add User </span>
+
+        <span *ngIf="loading"> Adding... </span>
+      </button>
+    </div>
+  </form>
+</div>

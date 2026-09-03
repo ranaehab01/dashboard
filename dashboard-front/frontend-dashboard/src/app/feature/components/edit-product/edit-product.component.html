@@ -1,0 +1,208 @@
+<div class="edit-product-container">
+  <div class="page-header">
+    <div>
+      <h1>Edit Product</h1>
+      <p>Update product information</p>
+    </div>
+  </div>
+
+  <!-- ERROR MESSAGE -->
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- SUCCESS MESSAGE -->
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form class="product-form" (ngSubmit)="updateProduct()">
+    <div class="form-group">
+      <label for="name"> Product Name </label>
+
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="product.name"
+        placeholder="Enter product name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="category"> Category </label>
+
+      <select
+        id="category"
+        name="category_id"
+        [(ngModel)]="product.category_id"
+        required
+      >
+        <option [ngValue]="0">Select category</option>
+
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.category || "No name" }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="price"> Price </label>
+
+      <input
+        id="price"
+        type="number"
+        name="price"
+        [(ngModel)]="product.price"
+        min="0"
+        step="0.01"
+        placeholder="Enter price"
+        required
+      />
+    </div>
+
+    <!-- ==========================================
+         STOCK
+    =========================================== -->
+
+    <div class="form-group">
+      <label for="stock"> Stock </label>
+
+      <input
+        id="stock"
+        type="number"
+        name="stock"
+        [(ngModel)]="product.stock"
+        min="0"
+        placeholder="Enter stock"
+        required
+      />
+    </div>
+
+    <!-- ==========================================
+         STATUS
+    =========================================== -->
+
+    <div class="form-group">
+      <label for="status"> Status </label>
+
+      <select id="status" name="status" [(ngModel)]="product.status">
+        <option value="active">Active</option>
+
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="image"> Product Image URL </label>
+
+      <input
+        id="image"
+        type="url"
+        name="image"
+        [(ngModel)]="product.image"
+        placeholder="https://example.com/image.jpg"
+        required
+      />
+
+      <div class="image-preview" *ngIf="product.image">
+        <img [src]="product.image" alt="Product preview" />
+      </div>
+    </div>
+
+    <!-- ==========================================
+         EXISTING SUB IMAGES
+    =========================================== -->
+
+    <div class="form-group sub-images-section">
+      <label> Existing Sub Images </label>
+
+      <!-- Existing images -->
+
+      <div class="sub-images-grid" *ngIf="subImages.length > 0">
+        <div
+          class="sub-image-card"
+          *ngFor="let image of subImages; let i = index"
+        >
+          <img [src]="image.image" [alt]="product.name" />
+
+          <button
+            type="button"
+            class="delete-image-button"
+            (click)="deleteSubImage(image.id, i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- No images -->
+
+      <p class="no-images" *ngIf="subImages.length === 0">
+        No sub images available.
+      </p>
+    </div>
+
+    <!-- ==========================================
+         ADD NEW SUB IMAGE
+    =========================================== -->
+
+    <div class="form-group">
+      <label for="subImageUrl"> Add Sub Image URL </label>
+
+      <div class="add-sub-image-row">
+        <input
+          id="subImageUrl"
+          type="url"
+          name="subImageUrl"
+          [(ngModel)]="newSubImageUrl"
+          placeholder="https://example.com/sub-image.jpg"
+        />
+
+        <button type="button" class="add-image-button" (click)="addSubImage()">
+          Add Image
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         NEW SUB IMAGES
+    =========================================== -->
+
+    <div class="form-group" *ngIf="newSubImages.length > 0">
+      <label> New Sub Images </label>
+
+      <div class="sub-images-grid">
+        <div
+          class="sub-image-card"
+          *ngFor="let image of newSubImages; let i = index"
+        >
+          <img [src]="image" [alt]="product.name" />
+
+          <button
+            type="button"
+            class="remove-image-button"
+            (click)="removeNewSubImage(i)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         ACTIONS
+    =========================================== -->
+
+    <div class="form-actions">
+      <button type="button" class="cancel-button" routerLink="/product">
+        Cancel
+      </button>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </div>
+  </form>
+</div>

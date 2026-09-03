@@ -1,0 +1,343 @@
+.users-container {
+margin-left: 250px;
+width: calc(100% - 250px);
+min-height: 100vh;
+padding: 35px 45px;
+box-sizing: border-box;
+background: #f8fafc;
+}
+
+/* =========================
+Page Header
+========================= */
+
+.page-header {
+max-width: 1200px;
+margin: 0 auto 25px auto;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.page-header h1 {
+margin: 0;
+font-size: 28px;
+font-weight: 600;
+color: #1f2937;
+}
+
+/* =========================
+Add Button
+========================= */
+
+.add-button {
+border: none;
+outline: none;
+
+padding: 11px 20px;
+
+border-radius: 7px;
+
+background: #2563eb;
+color: white;
+
+font-size: 14px;
+font-weight: 500;
+
+cursor: pointer;
+
+transition: 0.2s ease;
+}
+
+.add-button:hover {
+background: #1d4ed8;
+}
+
+.add-button:active {
+transform: scale(0.97);
+}
+
+/* =========================
+Table
+========================= */
+
+table {
+width: 100%;
+max-width: 1200px;
+
+margin: 0 auto;
+
+border-collapse: collapse;
+
+background: #ffffff;
+
+border: 1px solid #e5e7eb;
+border-radius: 10px;
+
+overflow: hidden;
+
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================
+Table Header
+========================= */
+
+thead {
+background: #f9fafb;
+}
+
+thead tr {
+border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+padding: 15px 18px;
+
+text-align: left;
+
+font-size: 13px;
+font-weight: 600;
+
+color: #6b7280;
+
+text-transform: uppercase;
+letter-spacing: 0.3px;
+}
+
+/* =========================
+Table Body
+========================= */
+
+tbody tr {
+border-bottom: 1px solid #f1f5f9;
+
+transition: background 0.2s ease;
+}
+
+tbody tr:last-child {
+border-bottom: none;
+}
+
+tbody tr:hover {
+background: #f8fafc;
+}
+
+td {
+padding: 16px 18px;
+
+font-size: 14px;
+
+color: #374151;
+}
+
+/* User */
+
+td:first-child {
+font-weight: 600;
+color: #111827;
+}
+
+/* Email */
+
+td:nth-child(2) {
+color: #6b7280;
+}
+
+/* Type */
+
+td:nth-child(3) {
+text-transform: capitalize;
+}
+
+/* Created */
+
+td:nth-child(5) {
+color: #6b7280;
+white-space: nowrap;
+}
+
+/* =========================
+Status
+========================= */
+
+.status-badge {
+display: inline-block;
+
+padding: 5px 10px;
+
+border-radius: 20px;
+
+font-size: 12px;
+font-weight: 600;
+
+text-transform: capitalize;
+}
+
+.status-badge.active {
+background: #dcfce7;
+color: #15803d;
+}
+
+.status-badge.inactive {
+background: #fee2e2;
+color: #b91c1c;
+}
+
+/* =========================
+Error
+========================= */
+
+.error {
+max-width: 1200px;
+
+margin: 0 auto 20px auto;
+
+padding: 13px 16px;
+
+border-radius: 7px;
+
+background: #fee2e2;
+border: 1px solid #fecaca;
+
+color: #b91c1c;
+
+font-size: 14px;
+}
+
+/* =========================
+Mobile / Tablet
+========================= */
+
+@media (max-width: 900px) {
+
+.users-container {
+margin-left: 250px;
+width: calc(100% - 250px);
+
+
+padding: 25px 20px;
+
+
+}
+
+table {
+display: block;
+overflow-x: auto;
+}
+}
+
+/* =========================
+Small Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+.users-container {
+margin-left: 0;
+width: 100%;
+
+
+padding: 20px 15px;
+
+
+}
+
+.page-header {
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+}
+
+.page-header h1 {
+font-size: 23px;
+}
+
+.add-button {
+padding: 9px 14px;
+}
+
+table {
+font-size: 13px;
+}
+
+th,
+td {
+padding: 12px;
+}
+}
+
+
+/* =========================
+Action Buttons
+========================= */
+
+.action-btn {
+border: none;
+outline: none;
+
+padding: 7px 13px;
+
+margin-right: 6px;
+
+border-radius: 5px;
+
+font-size: 12px;
+font-weight: 600;
+
+cursor: pointer;
+
+transition: all 0.2s ease;
+}
+
+.action-btn:last-child {
+margin-right: 0;
+}
+
+/* =========================
+View Button
+========================= */
+
+.view-btn {
+background: #e0f2fe;
+color: #0369a1;
+}
+
+.view-btn:hover {
+background: #bae6fd;
+}
+
+/* =========================
+Edit Button
+========================= */
+
+.edit-btn {
+background: #fef3c7;
+color: #92400e;
+}
+
+.edit-btn:hover {
+background: #fde68a;
+}
+
+/* =========================
+Delete Button
+========================= */
+
+.delete-btn {
+background: #fee2e2;
+color: #b91c1c;
+}
+
+.delete-btn:hover {
+background: #fecaca;
+}
+
+/* =========================
+Click Effect
+========================= */
+
+.action-btn:active {
+transform: scale(0.95);
+}

@@ -1,0 +1,104 @@
+<div class="product-details-container">
+  <button type="button" class="back-button" (click)="goBack()">
+    ← Back to Products
+  </button>
+
+  <div *ngIf="loading" class="loading">Loading product...</div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="product && !loading" class="product-card">
+    <div class="product-image-section">
+      <div class="main-image-container">
+        <img
+          [src]="selectedImage || product.image"
+          [alt]="product.name"
+          class="product-image"
+        />
+      </div>
+
+      <div class="product-thumbnails">
+        <button
+          *ngIf="product.image"
+          type="button"
+          class="thumbnail-button"
+          (click)="selectImage(product.image)"
+        >
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+            class="thumbnail-image"
+          />
+        </button>
+
+        <!-- Sub Images -->
+        <button
+          *ngFor="let image of product.sub_images"
+          type="button"
+          class="thumbnail-button"
+          (click)="selectImage(image.image)"
+        >
+          <img
+            [src]="image.image"
+            [alt]="product.name"
+            class="thumbnail-image"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-name">
+        {{ product.name }}
+      </h1>
+
+      <div class="info-row">
+        <span class="label"> Category </span>
+
+        <span class="value">
+          {{ product.category?.name?.en || "No category" }}
+        </span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Description </span>
+
+        <span class="value">
+          {{ product.category?.description?.en || "No description" }}
+        </span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Price </span>
+
+        <span class="value"> ${{ product.price }} </span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Stock </span>
+
+        <span class="value">
+          {{ product.stock }}
+        </span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Status </span>
+
+        <span class="value">
+          {{ product.status }}
+        </span>
+      </div>
+
+      <div class="info-row">
+        <span class="label"> Generated At </span>
+
+        <span class="value">
+          {{ product.created_at | date: "medium" }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

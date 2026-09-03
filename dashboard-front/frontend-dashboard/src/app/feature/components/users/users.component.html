@@ -1,0 +1,73 @@
+<div class="users-container">
+  <div class="page-header">
+    <h1>Users</h1>
+
+    <button class="add-button" type="button" routerLink="/add-user">
+      Add User
+    </button>
+  </div>
+
+  <div *ngIf="loading">Loading users...</div>
+
+  <div class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <table *ngIf="!loading && users.length > 0">
+    <thead>
+      <tr>
+        <th>User</th>
+
+        <th>Email</th>
+
+        <th>Type</th>
+
+        <th>Status</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>
+          {{ user.user }}
+        </td>
+
+        <td>
+          {{ user.email }}
+        </td>
+
+        <td>
+          {{ user.type }}
+        </td>
+
+        <td>
+          {{ user.status }}
+        </td>
+
+        <td class="actions">
+          <button
+            type="button"
+            class="action-btn edit-btn"
+            [routerLink]="['/edit-user', user.id]"
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteUser(user.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && users.length === 0 && !errorMessage">
+    No users found.
+  </div>
+</div>

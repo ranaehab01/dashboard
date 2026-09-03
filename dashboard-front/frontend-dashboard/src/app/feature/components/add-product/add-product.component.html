@@ -1,0 +1,165 @@
+<div class="add-product-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Add Product</h1>
+      <p>Create a new product</p>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Form -->
+  <form class="product-form" (ngSubmit)="addProduct()">
+    <!-- Product Name -->
+    <div class="form-group">
+      <label for="name"> Product Name </label>
+
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="newProduct.name"
+        placeholder="Enter product name"
+        required
+      />
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+      <label for="category"> Category </label>
+
+      <select
+        id="category"
+        name="category_id"
+        [(ngModel)]="newProduct.category_id"
+        [disabled]="loadingCategories"
+        required
+      >
+        <option [ngValue]="0">Select category</option>
+
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.category || "No name" }}
+        </option>
+      </select>
+
+      <small *ngIf="loadingCategories"> Loading categories... </small>
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price"> Price </label>
+
+      <input
+        id="price"
+        type="number"
+        name="price"
+        [(ngModel)]="newProduct.price"
+        min="0"
+        step="0.01"
+        placeholder="Enter price"
+        required
+      />
+    </div>
+
+    <!-- Stock -->
+    <div class="form-group">
+      <label for="stock"> Stock </label>
+
+      <input
+        id="stock"
+        type="number"
+        name="stock"
+        [(ngModel)]="newProduct.stock"
+        min="0"
+        placeholder="Enter stock"
+        required
+      />
+    </div>
+
+    <!-- Status -->
+    <div class="form-group">
+      <label for="status"> Status </label>
+
+      <select id="status" name="status" [(ngModel)]="newProduct.status">
+        <option value="active">Active</option>
+
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+    <!-- Image URL -->
+    <div class="form-group">
+      <label for="image"> Product Image URL </label>
+
+      <input
+        id="image"
+        type="url"
+        name="image"
+        [(ngModel)]="newProduct.image"
+        placeholder="https://example.com/image.jpg"
+        required
+      />
+
+      <!-- Image Preview -->
+      <div class="image-preview" *ngIf="newProduct.image">
+        <img [src]="newProduct.image" alt="Product preview" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label> Sub Images </label>
+
+      @for (image of newProduct.sub_images; track $index) {
+        <div class="sub-image-row">
+          <input
+            type="url"
+            [name]="'sub_image_' + $index"
+            [(ngModel)]="newProduct.sub_images[$index]"
+            placeholder="https://example.com/sub-image.jpg"
+          />
+
+          <button
+            type="button"
+            class="remove-image-button"
+            (click)="removeSubImage($index)"
+          >
+            Remove
+          </button>
+        </div>
+
+        <!-- Preview -->
+        @if (image) {
+          <div class="sub-image-preview">
+            <img [src]="image" alt="Sub image preview" />
+          </div>
+        }
+      }
+
+      <button type="button" class="add-image-button" (click)="addSubImage()">
+        + Add Sub Image
+      </button>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="button" class="cancel-button" routerLink="/product">
+        Cancel
+      </button>
+
+      <button type="submit" class="submit-button" [disabled]="loading">
+        <span *ngIf="!loading"> Add Product </span>
+
+        <span *ngIf="loading"> Adding... </span>
+      </button>
+    </div>
+    <!-- Sub Images -->
+  </form>
+</div>

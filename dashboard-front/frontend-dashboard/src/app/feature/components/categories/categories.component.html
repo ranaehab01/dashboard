@@ -1,0 +1,86 @@
+<div class="categories-container">
+  <div class="page-header">
+    <h1>Categories</h1>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="language-btn"
+        [class.active]="currentLanguage === 'en'"
+        (click)="changeLanguage('en')"
+      >
+        English
+      </button>
+
+      <button
+        type="button"
+        class="language-btn"
+        [class.active]="currentLanguage === 'ar'"
+        (click)="changeLanguage('ar')"
+      >
+        العربية
+      </button>
+
+      <button class="add-button" type="button" routerLink="/add-category">
+        Add Category
+      </button>
+    </div>
+  </div>
+
+  <table *ngIf="categories.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+
+        <th>Category</th>
+
+        <th>Description</th>
+
+        <th>Products</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>
+          {{ category.id }}
+        </td>
+
+        <td>
+          {{ category.category || "No name" }}
+        </td>
+
+        <td>
+          {{ category.description || "No description" }}
+        </td>
+
+        <td>
+          {{ category.products }}
+        </td>
+
+        <td class="actions">
+          <button
+            type="button"
+            class="action-btn edit-btn"
+            routerLink="/edit-category/{{ category.id }}"
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteCategory(category.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div *ngIf="categories.length === 0">No categories found.</div>
+</div>
